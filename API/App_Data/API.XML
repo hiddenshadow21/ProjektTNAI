@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>API</name>
+    </assembly>
+    <members>
+        <member name="M:API.Controllers.AuthorsController.GetAuthors">
+            <summary>
+            Funkcja do pobierania wszystkich autorów
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.AuthorsController.GetAuthor(System.Int32)">
+            <summary>
+            Funkcja do pobierania autora o danym ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="P:API.Models.InputModels.AuthorInputModel.ID">
+            <summary>
+            ID autora
+            </summary>
+        </member>
+        <member name="P:API.Models.InputModels.AuthorInputModel.FirstName">
+            <summary>
+            Imię autora
+            </summary>
+        </member>
+        <member name="P:API.Models.InputModels.AuthorInputModel.LastName">
+            <summary>
+            Nazwisko autora
+            </summary>
+        </member>
+    </members>
+</doc>
