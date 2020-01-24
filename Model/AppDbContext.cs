@@ -1,5 +1,7 @@
-﻿using Model.Configuration;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
+using Model.Configuration;
 using Model.Entities;
+using Model.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Model
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<ApplicationUser>
     {
         public static AppDbContext Create()
         {
@@ -21,7 +23,7 @@ namespace Model
         public DbSet<Borrower> Borrowers { get; set; }
         public DbSet<Loan> Loans { get; set; }
 
-        public AppDbContext() : base("AppDbConnection")
+        public AppDbContext() : base("AppDbConnection", throwIfV1Schema: false)
         {
             Configuration.LazyLoadingEnabled = true;
             Configuration.ProxyCreationEnabled = true;
