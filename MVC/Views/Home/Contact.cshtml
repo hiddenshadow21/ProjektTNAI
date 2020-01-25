@@ -1,17 +1,32 @@
 ﻿@{
-    ViewBag.Title = "Contact";
+    ViewBag.Title = "Skontaktuj się z Nami w wygodny dla Ciebie sposób";
 }
 <h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+<link rel="stylesheet" href="~/Content/glowny.css" type="text/css" />
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+<div class="kontener">
+    <div id="lewy">
+        <form action="mailto:input@it24.pl" method="post" enctype="text/plain">
+            <label for="imie">Imie</label><br />
+            <input type="text" id="imie" name="nimie" placeholder="Twoje imie"><br />
+            <label for="nazwisko">Nazwisko</label><br />
+            <input type="text" id="nazwisko" name="nnazwisko" placeholder="Twoje nazwisko"><br />
+            <label for="nrtelefonu">Nr telefonu</label><br />
+            <input type="text" id="nrtelefonu" name="nnrtelefonu" placeholder="Twój nr telefonu"><br /> <br />
+            <label for="tresc">Pytanie</label><br />
+            <textarea id="tresc" name="ntresc" placeholder="Zadaj Nam pytanie! Odpiszemy na podany przez Ciebie adres, bądź skontaktujemy się telefonicznie!" style="height:200px"></textarea><br />
+            <input type="submit" value="Wyślij">
+        </form>
+    </div>
+    <div id="prawy">
+        <h2>Kontakt bezpośredni:</h2>
+        <h3><address>
+            Biblioteka onLine<br />
+            ul. Grudziądzka 5/7
+            87-100 Toruń<br />
+            Nr telefonu:
+            +48 123 456 789
+        </address></h3>
+    </div>
+</div>
