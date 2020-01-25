@@ -5,10 +5,12 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>Index</h2>
+<link rel="stylesheet" href="~/Content/glowny.css" type="text/css" />
+
+<h2>Osoby z dostępem do zasobów biblioteki</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Dodaj osobe", "Create")
 </p>
 <table class="table">
     <tr>
@@ -36,11 +38,10 @@
         @Html.DisplayFor(modelItem => item.LastName)
     </td>
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
-        @Html.ActionLink("Details", "Details", new { id = item.ID }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.ID })
+        @Html.ActionLink("Edytuj", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Usuń", "Delete", new { id = item.ID }) |
+        @Html.ActionLink("Informacje szczegółowe", "Details", new { id = item.ID })
     </td>
 </tr>
 }
-
 </table>
