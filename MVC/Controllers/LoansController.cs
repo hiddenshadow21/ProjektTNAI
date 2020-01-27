@@ -10,16 +10,25 @@ using System.Web.Mvc;
 using Model;
 using Model.Entities;
 using Repository.Concrete;
+using Repository.Abstract;
+using AutoMapper;
+using MVC.Models.OutputModels;
 
 namespace MVC.Controllers
 {
     public class LoansController : Controller
     {
-        private readonly LoanRepository _loanRepository;
+        private readonly ILoanRepository _loanRepository;
+        private readonly IBookRepository _bookRepository;
+        private readonly IBorrowerRepository _borrowerRepository;
+        private readonly IMapper _mapper;
 
-        public LoansController()
+        public LoansController(ILoanRepository loanRepository, IBorrowerRepository borrowerRepository, IBookRepository bookRepository, IMapper mapper)
         {
-            _loanRepository = new LoanRepository();
+            _loanRepository = loanRepository;
+            _bookRepository = bookRepository;
+            _borrowerRepository = borrowerRepository;
+            _mapper = mapper;
         }
 
         // GET: Loans
@@ -43,7 +52,11 @@ namespace MVC.Controllers
         // GET: Loans/Create
         public ActionResult Create()
         {
-            return View(new Loan());
+            var books = Task.Run(() => _bookRepository.GetAllAsync()).Result;
+            ViewBag.BookId = new SelectList(books, "ID", "Name");
+            var borrowers = Task.Run(() => _borrowerRepository.GetAllAsync()).Result;
+            ViewBag.BorrowerId = new SelectList(_mapper.Map<List<BorrowerOutputModel>>(borrowers), "ID", "Fullname");
+            return View();
         }
 
         // POST: Loans/Create
@@ -56,18 +69,21 @@ namespace MVC.Controllers
             if (ModelState.IsValid)
             {
                 loan.LoanStart = DateTime.Now;
-                BookRepository bookRepo = new BookRepository();
-                var book = await bookRepo.GetByIdAsync(loan.BookID);
+                var book = await _bookRepository.GetByIdAsync(loan.BookID);
                 if (book.Amount <= 0)
                     return HttpNotFound();
                 book.Amount--;
-                await bookRepo.SaveAsync(book);
+                await _bookRepository.SaveAsync(book);
 
                 var result = await _loanRepository.SaveAsync(loan);
                 if (!result)
                     return View(loan);
                 return RedirectToAction("Index");
             }
+            var books = await _bookRepository.GetAllAsync();
+            ViewBag.BookId = new SelectList(books, "ID", "Name");
+            var borrowers = await _borrowerRepository.GetAllAsync();
+            ViewBag.BorrowerId = new SelectList(_mapper.Map<List<BorrowerOutputModel>>(borrowers), "ID", "FullName");
             return View(loan);
         }
 
@@ -79,6 +95,10 @@ namespace MVC.Controllers
             {
                 return HttpNotFound();
             }
+            var books = await _bookRepository.GetAllAsync();
+            ViewBag.BookId = new SelectList(books, "ID", "Name");
+            var borrowers = await _borrowerRepository.GetAllAsync();
+            ViewBag.BorrowerId = new SelectList(_mapper.Map<List<BorrowerOutputModel>>(borrowers), "ID", "FullName");
             return View(loan);
         }
 
@@ -97,6 +117,10 @@ namespace MVC.Controllers
                     return View(loan);
                 return RedirectToAction("Index");
             }
+            var books = await _bookRepository.GetAllAsync();
+            ViewBag.BookId = new SelectList(books, "ID", "Name");
+            var borrowers = await _borrowerRepository.GetAllAsync();
+            ViewBag.BorrowerId = new SelectList(_mapper.Map<List<BorrowerOutputModel>>(borrowers), "ID", "FullName");
             return View(loan);
         }
 
@@ -120,15 +144,12 @@ namespace MVC.Controllers
             if (loan == null)
                 return HttpNotFound();
 
-            BookRepository bookRepo = new BookRepository();
-            var book = await bookRepo.GetByIdAsync(loan.BookID);
+            var book = await _bookRepository.GetByIdAsync(loan.BookID);
             
-            var result = await _loanRepository.DeleteAsync(loan);
+            await _loanRepository.DeleteAsync(loan);
 
             book.Amount++;
-            await bookRepo.SaveAsync(book);
-            if (!result)
-                return View(loan);
+            await _bookRepository.SaveAsync(book);
             return RedirectToAction("Index");
         }
     }

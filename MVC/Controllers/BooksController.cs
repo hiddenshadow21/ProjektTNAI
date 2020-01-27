@@ -10,17 +10,22 @@ using System.Web.Mvc;
 using Model;
 using Model.Entities;
 using Repository.Abstract;
-using Repository.Concrete;
+using AutoMapper;
+using MVC.Models.OutputModels;
 
 namespace MVC.Controllers
 {
     public class BooksController : Controller
     {
-        private readonly BookRepository _bookRepository;
+        private readonly IBookRepository _bookRepository;
+        private readonly IAuthorRepository _authorRepository;
+        private readonly IMapper _mapper;
 
-        public BooksController()
+        public BooksController(IBookRepository bookRepository, IAuthorRepository authorRepository, IMapper mapper)
         {
-            _bookRepository = new BookRepository();
+            _bookRepository = bookRepository;
+            _authorRepository = authorRepository;
+            _mapper = mapper;
         }
 
         // GET: Books
@@ -44,7 +49,9 @@ namespace MVC.Controllers
         // GET: Books/Create
         public ActionResult Create()
         {
-            return View(new Book());
+            var authors = Task.Run(() => _authorRepository.GetAllAsync()).Result;
+            ViewBag.Author = new SelectList( _mapper.Map<List<AuthorOutputModel>>(authors), "ID", "Fullname");
+            return View();
         }
 
         // POST: Books/Create
@@ -56,11 +63,11 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _bookRepository.SaveAsync(book);
-                if (!result)
-                    return View(book);
+                await _bookRepository.SaveAsync(book);
                 return RedirectToAction("Index");
             }
+            var authors = await _authorRepository.GetAllAsync();
+            ViewBag.Author = new SelectList(_mapper.Map<List<AuthorOutputModel>>(authors), "ID", "Fullname");
             return View(book);
         }
 
@@ -72,6 +79,8 @@ namespace MVC.Controllers
             {
                 return HttpNotFound();
             }
+            var authors = await _authorRepository.GetAllAsync();
+            ViewBag.Author = new SelectList(_mapper.Map<List<AuthorOutputModel>>(authors), "ID", "Fullname");
             return View(book);
         }
 
@@ -84,11 +93,11 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _bookRepository.SaveAsync(book);
-                if (!result)
-                    return View(book);
+                await _bookRepository.SaveAsync(book);
                 return RedirectToAction("Index");
             }
+            var authors = await _authorRepository.GetAllAsync();
+            ViewBag.Author = new SelectList(_mapper.Map<List<AuthorOutputModel>>(authors), "ID", "Fullname");
             return View(book);
         }
 
@@ -109,11 +118,7 @@ namespace MVC.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Book book = await _bookRepository.GetByIdAsync(id);
-            if (book == null)
-                return HttpNotFound();
-            var result = await _bookRepository.DeleteAsync(book);
-            if (!result)
-                return View(book);
+            await _bookRepository.DeleteAsync(book);
             return RedirectToAction("Index");
         }
     }

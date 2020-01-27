@@ -9,23 +9,24 @@ using System.Web;
 using System.Web.Mvc;
 using Model;
 using Model.Entities;
-using Repository.Concrete;
+using Repository.Abstract;
 
 namespace MVC.Controllers
 {
     public class AuthorsController : Controller
     {
-        private readonly AuthorRepository _authorRepository;
+        private readonly IAuthorRepository _authorRepository;
 
-        public AuthorsController()
+        public AuthorsController(IAuthorRepository authorRepository)
         {
-            _authorRepository = new AuthorRepository();
+            _authorRepository = authorRepository;
         }
 
         // GET: Authors
         public async Task<ActionResult> Index()
         {
-            return View(await _authorRepository.GetAllAsync());
+            var authors = await _authorRepository.GetAllAsync();
+            return View(authors);
         }
 
         // GET: Authors/Details/5
@@ -42,7 +43,7 @@ namespace MVC.Controllers
         // GET: Authors/Create
         public ActionResult Create()
         {
-            return View(new Author());
+            return View();
         }
 
         // POST: Authors/Create
@@ -54,12 +55,9 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _authorRepository.SaveAsync(author);
-                if (!result)
-                    return View(author);
+                await _authorRepository.SaveAsync(author);
                 return RedirectToAction("Index");
             }
-
             return View(author);
         }
 
@@ -83,9 +81,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _authorRepository.SaveAsync(author);
-                if (!result)
-                    return View(author);
+                await _authorRepository.SaveAsync(author);
                 return RedirectToAction("Index");
             }
             return View(author);
@@ -108,11 +104,7 @@ namespace MVC.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             var author = await _authorRepository.GetByIdAsync(id);
-            if (author == null)
-                return HttpNotFound();
-            var result = await _authorRepository.DeleteAsync(author);
-            if (!result)
-                return View(author);
+            await _authorRepository.DeleteAsync(author);
             return RedirectToAction("Index");
         }
     }

@@ -9,23 +9,24 @@ using System.Web;
 using System.Web.Mvc;
 using Model;
 using Model.Entities;
-using Repository.Concrete;
+using Repository.Abstract;
 
 namespace MVC.Controllers
 {
     public class BorrowersController : Controller
     {
-        private readonly BorrowerRepository _borrowerRepository;
+        private readonly IBorrowerRepository _borrowerRepository;
 
-        public BorrowersController()
+        public BorrowersController(IBorrowerRepository borrowerRepository)
         {
-            _borrowerRepository = new BorrowerRepository();
+            _borrowerRepository = borrowerRepository;
         }
 
         // GET: Borrowers
         public async Task<ActionResult> Index()
         {
-            return View(await _borrowerRepository.GetAllAsync());
+            var borrowers = await _borrowerRepository.GetAllAsync();
+            return View(borrowers);
         }
 
         // GET: Borrowers/Details/5
@@ -42,7 +43,7 @@ namespace MVC.Controllers
         // GET: Borrowers/Create
         public ActionResult Create()
         {
-            return View(new Borrower());
+            return View();
         }
 
         // POST: Borrowers/Create
@@ -54,9 +55,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _borrowerRepository.SaveAsync(borrower);
-                if (!result)
-                    return View(borrower);
+                await _borrowerRepository.SaveAsync(borrower);
                 return RedirectToAction("Index");
             }
 
@@ -83,9 +82,7 @@ namespace MVC.Controllers
         {
             if (ModelState.IsValid)
             {
-                var result = await _borrowerRepository.SaveAsync(borrower);
-                if (!result)
-                    return View(borrower);
+                await _borrowerRepository.SaveAsync(borrower);
                 return RedirectToAction("Index");
             }
             return View(borrower);
@@ -108,11 +105,7 @@ namespace MVC.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Borrower borrower = await _borrowerRepository.GetByIdAsync(id);
-            if (borrower == null)
-                return HttpNotFound();
-            var result = await _borrowerRepository.DeleteAsync(borrower);
-            if (!result)
-                return View(borrower);
+            await _borrowerRepository.DeleteAsync(borrower);
             return RedirectToAction("Index");
         }
     }

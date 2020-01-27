@@ -12,6 +12,7 @@ namespace Model.Entities
         public int ID { get; set; }
         [Display(Name = "Tytuł")]
         public string Name { get; set; }
+        [Display(Name = "Ilość")]
         public int Amount { get; set; }
         public int AuthorID { get; set; }
         public virtual Author Author { get; set; }
