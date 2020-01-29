@@ -50,7 +50,7 @@ namespace MVC.Controllers
         public ActionResult Create()
         {
             var authors = Task.Run(() => _authorRepository.GetAllAsync()).Result;
-            ViewBag.Author = new SelectList( _mapper.Map<List<AuthorOutputModel>>(authors), "ID", "Fullname");
+            ViewBag.AuthorID = new SelectList( _mapper.Map<List<AuthorOutputModel>>(authors), "ID", "Fullname");
             return View();
         }
 
@@ -67,7 +67,7 @@ namespace MVC.Controllers
                 return RedirectToAction("Index");
             }
             var authors = await _authorRepository.GetAllAsync();
-            ViewBag.Author = new SelectList(_mapper.Map<List<AuthorOutputModel>>(authors), "ID", "Fullname");
+            ViewBag.AuthorID = new SelectList(_mapper.Map<List<AuthorOutputModel>>(authors), "ID", "Fullname");
             return View(book);
         }
 
@@ -80,7 +80,7 @@ namespace MVC.Controllers
                 return HttpNotFound();
             }
             var authors = await _authorRepository.GetAllAsync();
-            ViewBag.Author = new SelectList(_mapper.Map<List<AuthorOutputModel>>(authors), "ID", "Fullname");
+            ViewBag.AuthorID = new SelectList(_mapper.Map<List<AuthorOutputModel>>(authors), "ID", "Fullname");
             return View(book);
         }
 
@@ -97,7 +97,7 @@ namespace MVC.Controllers
                 return RedirectToAction("Index");
             }
             var authors = await _authorRepository.GetAllAsync();
-            ViewBag.Author = new SelectList(_mapper.Map<List<AuthorOutputModel>>(authors), "ID", "Fullname");
+            ViewBag.AuthorID = new SelectList(_mapper.Map<List<AuthorOutputModel>>(authors), "ID", "Fullname");
             return View(book);
         }
 
