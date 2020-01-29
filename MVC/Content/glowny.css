@@ -104,3 +104,8 @@ input[type=submit]:hover {
     height: 230px;
     font-size: 2.0rem;
 }
+a 
+{
+    color: #FF5722;
+    text-decoration: none;
+}

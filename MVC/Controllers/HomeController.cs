@@ -13,13 +13,6 @@ namespace MVC.Controllers
             return View();
         }
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Strona główna"; 
-
-            return View();
-        }
-
         public ActionResult Contact()
         {
             ViewBag.Message = "Strona kontaktowa";
