@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Model</name>
+    </assembly>
+    <members>
+        <member name="P:Model.Entities.Book.ID">
+            <summary>
+            ID książki
+            </summary>
+        </member>
+        <member name="P:Model.Entities.Book.Name">
+            <summary>
+            Tytuł książki
+            </summary>
+        </member>
+        <member name="P:Model.Entities.Book.Amount">
+            <summary>
+            Ilośc kopii danej książki
+            </summary>
+        </member>
+        <member name="P:Model.Entities.Book.AuthorID">
+            <summary>
+            ID autora
+            </summary>
+        </member>
+        <member name="P:Model.Entities.Book.Author">
+            <summary>
+            Dane autora
+            </summary>
+        </member>
+        <member name="P:Model.Entities.Borrower.ID">
+            <summary>
+            ID wypożyczającego
+            </summary>
+        </member>
+        <member name="P:Model.Entities.Borrower.FirstName">
+            <summary>
+            Imie wypożyczającego
+            </summary>
+        </member>
+        <member name="P:Model.Entities.Borrower.LastName">
+            <summary>
+            Nazwisko wypożyczającego
+            </summary>
+        </member>
+        <member name="P:Model.Entities.Borrower.Loans">
+            <summary>
+            Aktywne wypożyczenia
+            </summary>
+        </member>
+    </members>
+</doc>

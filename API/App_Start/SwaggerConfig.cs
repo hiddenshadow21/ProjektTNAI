@@ -102,6 +102,7 @@ namespace API
                         // more Xml comment files.
                         //
                         c.IncludeXmlComments(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/API.XML"));
+                        c.IncludeXmlComments(System.Web.Hosting.HostingEnvironment.MapPath("~/App_Data/Model.XML"));
 
                         // Swashbuckle makes a best attempt at generating Swagger compliant JSON schemas for the various types
                         // exposed in your API. However, there may be occasions when more control of the output is needed.

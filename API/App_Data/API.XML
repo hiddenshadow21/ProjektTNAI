@@ -17,6 +17,123 @@
             <param name="id"></param>
             <returns></returns>
         </member>
+        <member name="M:API.Controllers.AuthorsController.PutAuthor(System.Int32,API.Models.InputModels.AuthorInputModel)">
+            <summary>
+            Funkcja do edycji autora o podanym ID
+            </summary>
+            <param name="id"></param>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.AuthorsController.PostAuthor(API.Models.InputModels.AuthorInputModel)">
+            <summary>
+            Funkcja do dodawania nowego autora
+            </summary>
+            <param name="author"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.AuthorsController.DeleteAuthor(System.Int32)">
+            <summary>
+            Funkcja do usuwania autora o podanym ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.BooksController.GetBooks">
+            <summary>
+            Funkcja do pobierania informacji o wszystkich książkach
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.BooksController.GetBook(System.Int32)">
+            <summary>
+            Funkcja do pobierania informacji o książce o podanym ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.BooksController.PutBook(System.Int32,Model.Entities.Book)">
+            <summary>
+            Funkcja do edycji informacji o książce o podanym ID
+            </summary>
+            <param name="id"></param>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.BooksController.PostBook(Model.Entities.Book)">
+            <summary>
+            Funkcja do dodawania nowej książki
+            </summary>
+            <param name="book"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.BooksController.DeleteBook(System.Int32)">
+            <summary>
+            Funkcja do usuwania książki o podanym ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.BorrowersController.GetBorrowers">
+            <summary>
+            Pobranie informacji o wszystkich wypożyczających
+            </summary>
+        </member>
+        <member name="M:API.Controllers.BorrowersController.GetBorrower(System.Int32)">
+            <summary>
+            Pobranie informacji wypożyczającego o podanym ID
+            </summary>
+        </member>
+        <member name="M:API.Controllers.BorrowersController.PutBorrower(System.Int32,Model.Entities.Borrower)">
+            <summary>
+            Edycja informacji wypożyczającego o podanym ID
+            </summary>
+        </member>
+        <member name="M:API.Controllers.BorrowersController.PostBorrower(Model.Entities.Borrower)">
+            <summary>
+            Dodanie nowego wypożyczającego
+            </summary>
+        </member>
+        <member name="M:API.Controllers.BorrowersController.DeleteBorrower(System.Int32)">
+            <summary>
+            Usuwanie wypożyczającego o podanym ID
+            </summary>
+        </member>
+        <member name="M:API.Controllers.LoansController.GetLoans">
+            <summary>
+            Funkcja do pobierania informacji o wszystkich trwających wypożyczeniach
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.LoansController.GetLoan(System.Int32)">
+            <summary>
+            Funkcja do pobierania informacji o trwającym wypożyczeniu o podanym ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.LoansController.PutLoan(System.Int32,API.Models.InputModels.Loan.LoanInputModel)">
+            <summary>
+            Funkcja do edycji trwającego wypożyczenia o podanym ID
+            </summary>
+            <param name="id"></param>
+            <param name="inputModel"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.LoansController.PostLoan(API.Models.InputModels.Loan.LoanInputModel)">
+            <summary>
+            Funkcja do dodawania nowego wypożyczenia
+            </summary>
+            <param name="loan"></param>
+            <returns></returns>
+        </member>
+        <member name="M:API.Controllers.LoansController.DeleteLoan(System.Int32)">
+            <summary>
+            Funkcja do usuwania trwającego wypożyczenia o podanym ID
+            </summary>
+            <param name="id"></param>
+            <returns></returns>
+        </member>
         <member name="P:API.Models.InputModels.AuthorInputModel.ID">
             <summary>
             ID autora
@@ -30,6 +147,26 @@
         <member name="P:API.Models.InputModels.AuthorInputModel.LastName">
             <summary>
             Nazwisko autora
+            </summary>
+        </member>
+        <member name="P:API.Models.InputModels.Loan.LoanInputModel.ID">
+            <summary>
+            ID wypożyczenia
+            </summary>
+        </member>
+        <member name="P:API.Models.InputModels.Loan.LoanInputModel.BookID">
+            <summary>
+            ID książki
+            </summary>
+        </member>
+        <member name="P:API.Models.InputModels.Loan.LoanInputModel.BorrowerID">
+            <summary>
+            ID wypożyczającego
+            </summary>
+        </member>
+        <member name="P:API.Models.InputModels.Loan.LoanInputModel.LoanStart">
+            <summary>
+            Data rozpoczęcia wypożyczania
             </summary>
         </member>
     </members>
