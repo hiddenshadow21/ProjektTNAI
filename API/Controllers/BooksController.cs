@@ -29,12 +29,21 @@ namespace API.Controllers
         }
 
         // GET: api/Books
+        /// <summary>
+        /// Funkcja do pobierania informacji o wszystkich książkach
+        /// </summary>
+        /// <returns></returns>
         public async Task<IHttpActionResult> GetBooks()
         {
             var books = await _bookRepository.GetAllAsync();
             return Ok(_mapper.Map<List<BookOutputModel>>(books));
         }
 
+        /// <summary>
+        /// Funkcja do pobierania informacji o książce o podanym ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/Books/5
         public async Task<IHttpActionResult> GetBook(int id)
         {
@@ -47,6 +56,12 @@ namespace API.Controllers
             return Ok(_mapper.Map<BookOutputModel>(book));
         }
 
+        /// <summary>
+        /// Funkcja do edycji informacji o książce o podanym ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="inputModel"></param>
+        /// <returns></returns>
         // PUT: api/Books/5
         public async Task<IHttpActionResult> PutBook(int id, Book inputModel)
         {
@@ -71,6 +86,11 @@ namespace API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Funkcja do dodawania nowej książki
+        /// </summary>
+        /// <param name="book"></param>
+        /// <returns></returns>
         // POST: api/Books
         public async Task<IHttpActionResult> PostBook(Book book)
         {
@@ -88,6 +108,11 @@ namespace API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Funkcja do usuwania książki o podanym ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // DELETE: api/Books/5
         public async Task<IHttpActionResult> DeleteBook(int id)
         {

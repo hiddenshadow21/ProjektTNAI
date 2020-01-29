@@ -29,6 +29,9 @@ namespace API.Controllers
         }
 
         // GET: api/Borrowers
+        /// <summary>
+        /// Pobranie informacji o wszystkich wypożyczających
+        /// </summary>
         public async Task<IHttpActionResult> GetBorrowers()
         {
             var borrowers = await _borrowerRepository.GetAllAsync();
@@ -36,6 +39,9 @@ namespace API.Controllers
         }
 
         // GET: api/Borrowers/5
+        /// <summary>
+        /// Pobranie informacji wypożyczającego o podanym ID
+        /// </summary>
         public async Task<IHttpActionResult> GetBorrower(int id)
         {
             Borrower borrower = await _borrowerRepository.GetByIdAsync(id);
@@ -48,6 +54,9 @@ namespace API.Controllers
         }
 
         // PUT: api/Borrowers/5
+        /// <summary>
+        /// Edycja informacji wypożyczającego o podanym ID
+        /// </summary>
         public async Task<IHttpActionResult> PutBorrower(int id, Borrower inputModel)
         {
             if (inputModel == null)
@@ -72,6 +81,9 @@ namespace API.Controllers
         }
 
         // POST: api/Borrowers
+        /// <summary>
+        /// Dodanie nowego wypożyczającego
+        /// </summary>
         public async Task<IHttpActionResult> PostBorrower(Borrower borrower)
         {
             if (borrower == null)
@@ -89,6 +101,9 @@ namespace API.Controllers
         }
 
         // DELETE: api/Borrowers/5
+        /// <summary>
+        /// Usuwanie wypożyczającego o podanym ID
+        /// </summary>
         public async Task<IHttpActionResult> DeleteBorrower(int id)
         {
             Borrower borrower = await _borrowerRepository.GetByIdAsync(id);

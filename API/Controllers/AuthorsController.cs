@@ -57,6 +57,12 @@ namespace API.Controllers
         }
 
         // PUT: api/Authors/5
+        /// <summary>
+        /// Funkcja do edycji autora o podanym ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="inputModel"></param>
+        /// <returns></returns>
         public async Task<IHttpActionResult> PutAuthor(int id, AuthorInputModel inputModel)
         {
             if (inputModel == null)
@@ -80,6 +86,11 @@ namespace API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Funkcja do dodawania nowego autora
+        /// </summary>
+        /// <param name="author"></param>
+        /// <returns></returns>
         // POST: api/Authors
         public async Task<IHttpActionResult> PostAuthor(AuthorInputModel author)
         {
@@ -97,6 +108,11 @@ namespace API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Funkcja do usuwania autora o podanym ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // DELETE: api/Authors/5
         public async Task<IHttpActionResult> DeleteAuthor(int id)
         {

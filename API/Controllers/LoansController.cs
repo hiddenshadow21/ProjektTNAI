@@ -29,6 +29,10 @@ namespace API.Controllers
             _mapper = mapper;
         }
 
+        /// <summary>
+        /// Funkcja do pobierania informacji o wszystkich trwających wypożyczeniach
+        /// </summary>
+        /// <returns></returns>
         // GET: api/Loans
         public async Task<IHttpActionResult> GetLoans()
         {
@@ -36,6 +40,11 @@ namespace API.Controllers
             return Ok(_mapper.Map<List<LoanOutputModel>>(loans));
         }
 
+        /// <summary>
+        /// Funkcja do pobierania informacji o trwającym wypożyczeniu o podanym ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/Loans/5
         public async Task<IHttpActionResult> GetLoan(int id)
         {
@@ -48,6 +57,12 @@ namespace API.Controllers
             return Ok(_mapper.Map<LoanOutputModel>(loan));
         }
 
+        /// <summary>
+        /// Funkcja do edycji trwającego wypożyczenia o podanym ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="inputModel"></param>
+        /// <returns></returns>
         // PUT: api/Loans/5
         public async Task<IHttpActionResult> PutLoan(int id, LoanInputModel inputModel)
         {
@@ -75,6 +90,11 @@ namespace API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Funkcja do dodawania nowego wypożyczenia
+        /// </summary>
+        /// <param name="loan"></param>
+        /// <returns></returns>
         // POST: api/Loans
         public async Task<IHttpActionResult> PostLoan(LoanInputModel loan)
         {
@@ -94,6 +114,11 @@ namespace API.Controllers
             return Ok();
         }
 
+        /// <summary>
+        /// Funkcja do usuwania trwającego wypożyczenia o podanym ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // DELETE: api/Loans/5
         public async Task<IHttpActionResult> DeleteLoan(int id)
         {
